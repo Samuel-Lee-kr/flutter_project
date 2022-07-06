@@ -1,0 +1,29 @@
+
+		{
+                  "test": [{
+            "imagePath": "assets/images/breakfast.png",
+            "titleTxt": "조식",
+            "kacl": "525",
+            "meals": ["밥22,", "느타리버섯국,", "호박쇠고기볶음,", "두부조림,", "깍두기", "스트링치즈"],
+            "startColor": "#7de83a",
+            "endColor": "#536349"
+		},
+            {
+                  "imagePath": "assets/images/breakfast.png",
+                  "titleTxt": "중식",
+                  "kacl": "525",
+                  "meals": ["밥23,", "느타리버섯국,", "호박쇠고기볶음,", "두부조림,", "깍두기", "스트링치즈"],
+                  "startColor": "#7de83a",
+                  "endColor": "#536349"
+                  },
+                  {
+                        "imagePath": "assets/images/breakfast.png",
+                        "titleTxt": "석식",
+                        "kacl": "525",
+                        "meals": ["밥22,", "느타리버섯국,", "호박쇠고기볶음,", "두부조림,", "깍두기", "스트링치즈"],
+                        "startColor": "#7de83a",
+                        "endColor": "#536349"
+                        }
+            ]
+            }
+      

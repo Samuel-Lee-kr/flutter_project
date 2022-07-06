@@ -13,17 +13,23 @@ dependencies:
   intl: 0.17.0
   google_maps_flutter: 2.1.8
   permission_handler: 10.0.0
+  json_annotation: ^4.4.0
+  freezed_annotation: ^1.0.0
   flutter: 
     sdk: flutter
 
 dev_dependencies: 
   flutter_lints: ^2.0.0
   lints: 2.0.0
+  build_runner: ^2.1.5
+  json_serializable: ^6.0.1  
+  freezed: ^1.0.0  
   flutter_test: 
     sdk: flutter
 
 flutter: 
   assets: 
     - assets/images/
+    - assets/data/
   uses-material-design: true
 
