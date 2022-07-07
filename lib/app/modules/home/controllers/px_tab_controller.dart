@@ -1,8 +1,10 @@
 import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:military/app/data/model/px.dart';
 import 'package:military/app/data/model/px_product_model.dart';
 import 'package:military/app/data/repository/px_product_repository.dart';
+import 'package:military/app/data/repository/px_repository.dart';
 
 // repo 있어야 한다.
 
@@ -10,8 +12,13 @@ class PxTabController extends GetxController with GetTickerProviderStateMixin {
   final PxProductRepository pxProductRepository;
   RxList<PxProducts> pxProductsList = <PxProducts>[].obs;
 
+  final PxRepository pxRepository;
+  RxList<Px> pxList = <Px>[].obs;
+
   PxTabController({
     required this.pxProductRepository,
+
+    required this.pxRepository
   });
 
   Animation<double>? secondTabAnimationController;
@@ -42,6 +49,9 @@ class PxTabController extends GetxController with GetTickerProviderStateMixin {
 
     pxProductsList.clear();
     pxProductsList.value = await pxProductRepository.getData();
+
+    // pxList.clear();
+    // pxList.value = await pxRepository.getAll();
 
     // debugPrint(pxProductsList.toString());
   }

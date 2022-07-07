@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:military/app/data/provider/px_provider.dart';
+import 'package:military/app/data/repository/px_repository.dart';
 import 'package:military/app/modules/home/controllers/customs/calendar_popup_controller.dart';
 import 'package:military/app/modules/home/controllers/first_tab_controller.dart';
 import 'package:military/app/modules/home/controllers/second_tab_controller.dart';
@@ -41,6 +43,9 @@ Future initializePxProduct() async {
       pxProductRepository: PxProductRepository(
         pxProductProvider: PxProductProvider(),
       ),
+      pxRepository: PxRepository(
+        pxProvider: PxProvider(),
+      )
     ),
     fenix: true,
   );
