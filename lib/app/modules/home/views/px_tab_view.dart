@@ -1,22 +1,19 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'package:military/app/modules/home/controllers/home_controller.dart';
-import 'package:military/app/modules/home/controllers/second_tab_controller.dart';
+import 'package:military/app/modules/home/controllers/px_tab_controller.dart';
 import 'package:military/app/modules/home/views/customs/calendar_popup_view.dart';
 import 'package:military/app/modules/home/views/first/title_view.dart';
 import 'package:military/app/modules/home/views/px/px_first_listview.dart';
 import 'package:military/app/modules/home/views/px/px_second_listview.dart';
 import 'package:military/app/modules/home/views/px/px_third_listview.dart';
-import 'package:military/app/modules/home/views/second/second_type1_view.dart';
-import 'package:military/app/modules/home/views/second/second_type2_view.dart';
-import 'package:military/app/modules/home/views/second/second_type3_view.dart';
 import 'package:military/app/ui/theme/app_theme.dart';
 
-class PxTabView extends GetView<SecondTabController> {
+class PxTabView extends GetView<PxTabController> {
+  // info-1 UI 를 그리기 위한 컨트롤러 찾기
   HomeController homeController = Get.find();
 
-  // SecondTabView() {
+  // chk : constructor 같은데 onInit()에 못들어가나?
   PxTabView() {
     controller.initSecondTabAnimationController(homeController.homeViewAnimationController!);
     bool isFirst = addAllListData();
@@ -48,6 +45,7 @@ class PxTabView extends GetView<SecondTabController> {
       return false;
     }
 
+    // info :
     controller.listViews.add(
       TitleView(
         titleTxt: '우리부대 인기 상품은?',
@@ -62,6 +60,7 @@ class PxTabView extends GetView<SecondTabController> {
       ),
     );
 
+    // info : 큰 사각형
     controller.listViews.add(
       PxFirstListView(
         animation: Tween<double>(begin: 0.0, end: 1.0).animate(
@@ -74,6 +73,7 @@ class PxTabView extends GetView<SecondTabController> {
       ),
     );
 
+    // info : 군인그림 있는 넓은 직사각형
     controller.listViews.add(
       PxSecondListView(
         animation: Tween<double>(begin: 0.0, end: 1.0).animate(
@@ -86,6 +86,7 @@ class PxTabView extends GetView<SecondTabController> {
       ),
     );
 
+    // info :
     controller.listViews.add(
       TitleView(
         titleTxt: '카테고리',
@@ -100,6 +101,7 @@ class PxTabView extends GetView<SecondTabController> {
       ),
     );
 
+    // info : 카테고리 그리드뷰
     controller.listViews.add(
       PxThirdListView(
         mainScreenAnimation: Tween<double>(begin: 0.0, end: 1.0).animate(
@@ -111,11 +113,10 @@ class PxTabView extends GetView<SecondTabController> {
         mainScreenAnimationController: homeController.homeViewAnimationController!,
       ),
     );
-
     return true;
   }
 
-  // info -> 네트웍
+  // info -> repo -> provider 연결해서 데이터 받아놓자
   Future<bool> getData() async {
     await Future<dynamic>.delayed(const Duration(milliseconds: 50));
     return true;

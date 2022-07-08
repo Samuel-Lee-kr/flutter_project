@@ -7,21 +7,17 @@ import '../../controllers/px_tab_controller.dart';
 
 
 class PxThirdListView extends GetView<PxTabController> {
-// class PxThirdListView extends GetxController with GetTickerProviderStateMixin {
-//   final PxTabController controller2 = Get.put(PxTabController());
-
   final AnimationController? mainScreenAnimationController;
   final Animation<double>? mainScreenAnimation;
 
-
-
-
   List<String> areaListData = [
-    'assets/images/area1.png',
-    'assets/images/area2.png',
-    'assets/images/area3.png',
-    'assets/images/area1.png',
+    'assets/images/anju.png',
+    'assets/images/lamen.png',
+    'assets/images/snack1.png',
+    'assets/images/drink.png',
   ];
+
+
 
   PxThirdListView({
     this.mainScreenAnimationController,
@@ -35,7 +31,8 @@ class PxThirdListView extends GetView<PxTabController> {
   @override
   Widget build(BuildContext context) {
 
-    // debugPrint(controller.getData());
+    // info : 카테고리 값 넣자
+    List<dynamic> categoryList = controller.categoryList;
 
     return AnimatedBuilder(
       animation: mainScreenAnimationController!,
@@ -57,9 +54,9 @@ class PxThirdListView extends GetView<PxTabController> {
                   physics: const BouncingScrollPhysics(),
                   scrollDirection: Axis.vertical,
                   children: List<Widget>.generate(
-                    areaListData.length,
+                    controller.categoryList.length,
                     (int index) {
-                      final int count = areaListData.length;
+                      final int count = controller.categoryList.length;
                       final Animation<double> animation =
                           Tween<double>(begin: 0.0, end: 1.0).animate(
                         CurvedAnimation(
@@ -69,6 +66,7 @@ class PxThirdListView extends GetView<PxTabController> {
                       );
                       controller.animationType3?.forward();
                       return AreaView(
+                        title : controller.categoryList[index],
                         imagePath: areaListData[index],
                         animation: animation,
                         animationController: controller.animationType3!,
@@ -94,11 +92,13 @@ class PxThirdListView extends GetView<PxTabController> {
 class AreaView extends StatelessWidget {
   const AreaView({
     Key? key,
+    this.title = "",
     this.imagePath,
     this.animationController,
     this.animation,
   }) : super(key: key);
 
+  final String title ;
   final String? imagePath;
   final AnimationController? animationController;
   final Animation<double>? animation;
@@ -144,7 +144,7 @@ class AreaView extends StatelessWidget {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(top: 5),
-                        child: Text('카테고리 이름'),
+                        child: Text(title),
                       ),
                       Expanded(
                         child: Padding(

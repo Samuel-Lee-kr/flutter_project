@@ -4,10 +4,18 @@ import 'package:get/get.dart';
 import 'package:military/app/data/model/px_product_model.dart';
 import 'package:military/app/data/repository/px_product_repository.dart';
 
-
 class PxTabController extends GetxController with GetTickerProviderStateMixin {
+  // info-1 repository
   final PxProductRepository pxProductRepository;
+
+  // info-2 ui 에서 쓸 원본 데이터
   RxList<PxProducts> pxProductsList = <PxProducts>[].obs;
+
+  List setList = [];
+
+  // info-3 ui 중 카테고리 명칭을 위한 중복제거 데이터 : 임시데이터
+  List<dynamic> _categoryList = [];
+  List<dynamic> get categoryList => _categoryList;
 
   PxTabController({
     required this.pxProductRepository,
@@ -20,7 +28,6 @@ class PxTabController extends GetxController with GetTickerProviderStateMixin {
   RxDouble topBarOpacity = 0.0.obs;
 
   final count = 5;
-
   AnimationController? animationType3;
 
   void initSecondTabAnimationController(AnimationController homeViewAnimationController) {
@@ -36,35 +43,19 @@ class PxTabController extends GetxController with GetTickerProviderStateMixin {
     );
   }
 
+  // info -> 상품데이터 불러오기
   Future<void> getData() async {
     pxProductsList.clear();
-    await pxProductRepository.getData().then((value) {
-      var index = 0;
-      for (var element in value){
-        pxProductsList.add(element);
-        debugPrint("${index++} controller :  ${element.company}" );
-      }
-    });
-
-    int index = 0;
-    for (var element in pxProductsList){
-      debugPrint("${index++} controller :  ${element.category}" );
-    }
-
-    // todo ->  리스트를 set 해서 카테고리 중복값을 없애고 4개를 넣어라
-    // findCategory(pxProductsList.toList());
-  }
-
-  findCategory(List list){
-
-    List setList = [];
-
-    for (int i = 0; i < list.length; i++){
-      setList.add(list[i]['category']);
-      debugPrint('${setList}');
-    }
-
-    debugPrint('findCategory');
+    await pxProductRepository.getData().then(
+      (value) {
+        for (var element in value) {
+          pxProductsList.add(element);
+          setList.add(element.category);
+        }
+      },
+    );
+    // 리스트를 set 해서 카테고리 중복값을 없애고 4개를 넣어라
+    _categoryList = setList.toSet().toList();
   }
 
   @override
