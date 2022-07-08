@@ -13,11 +13,11 @@ class PxProductProvider extends GetxService {
   }
 
   Future<Map<String, dynamic>> getData() async {
-    var result = await rootBundle.loadString('assets/data/px_product.json');
-    Map<String, dynamic> productsInfo = json.decode(result);
+    var jsonResult = await rootBundle.loadString('assets/data/px_product.json');
+    Map<String, dynamic> productsInfoMap = json.decode(jsonResult);
 
-    debugPrint("productsInfo : ${productsInfo}");
+    debugPrint("px provider : ${productsInfoMap}");
 
-    return productsInfo;
+    return productsInfoMap;
   }
 }

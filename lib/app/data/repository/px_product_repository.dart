@@ -13,16 +13,18 @@ class PxProductRepository extends GetxService {
   });
 
  Future<List<PxProducts>> getData() async {
-   List<PxProducts>  productsInfo = [];
-
-   debugPrint('11111111111');
-
    Map<String, dynamic> result =  await pxProductProvider.getData();
 
-   debugPrint(result.toString());
+   List temp = result['row'];
+   List<PxProducts>  productsInfo = [];
 
-   productsInfo.add(PxProducts.fromJson(result));
+   int index = 0;
+   for (var element in temp){
+     productsInfo.add(PxProducts.fromJson(element));
 
+     debugPrint("${index++} element :  ${element}" );
+   }
+   debugPrint("productInfo :  ${productsInfo[0].category}" );
    return productsInfo;
   }
 }

@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:military/app/data/model/px_product_model.dart';
 import 'package:military/app/data/repository/px_product_repository.dart';
 
-// repo 있어야 한다.
 
 class PxTabController extends GetxController with GetTickerProviderStateMixin {
   final PxProductRepository pxProductRepository;
@@ -38,12 +37,34 @@ class PxTabController extends GetxController with GetTickerProviderStateMixin {
   }
 
   Future<void> getData() async {
-
-
     pxProductsList.clear();
-    pxProductsList.value = await pxProductRepository.getData();
+    await pxProductRepository.getData().then((value) {
+      var index = 0;
+      for (var element in value){
+        pxProductsList.add(element);
+        debugPrint("${index++} controller :  ${element.company}" );
+      }
+    });
 
-    // debugPrint(pxProductsList.toString());
+    int index = 0;
+    for (var element in pxProductsList){
+      debugPrint("${index++} controller :  ${element.category}" );
+    }
+
+    // todo ->  리스트를 set 해서 카테고리 중복값을 없애고 4개를 넣어라
+    // findCategory(pxProductsList.toList());
+  }
+
+  findCategory(List list){
+
+    List setList = [];
+
+    for (int i = 0; i < list.length; i++){
+      setList.add(list[i]['category']);
+      debugPrint('${setList}');
+    }
+
+    debugPrint('findCategory');
   }
 
   @override
