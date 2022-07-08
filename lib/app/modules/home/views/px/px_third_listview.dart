@@ -1,9 +1,9 @@
+// ignore_for_file: must_be_immutable
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:military/app/modules/home/controllers/second_tab_controller.dart';
 import 'package:military/app/ui/theme/app_theme.dart';
 import '../../controllers/px_tab_controller.dart';
-
 
 
 class PxThirdListView extends GetView<PxTabController> {
@@ -17,16 +17,12 @@ class PxThirdListView extends GetView<PxTabController> {
     'assets/images/drink.png',
   ];
 
-
-
   PxThirdListView({
     this.mainScreenAnimationController,
     this.mainScreenAnimation,
   }) {
     controller.initAnimationType3();
   }
-
-
 
   @override
   Widget build(BuildContext context) {
