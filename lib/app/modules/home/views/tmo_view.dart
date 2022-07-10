@@ -4,20 +4,15 @@ import 'package:get/get.dart';
 import 'package:military/app/modules/home/controllers/home_controller.dart';
 import 'package:military/app/modules/home/controllers/tmo_controller.dart';
 import 'package:military/app/modules/home/views/customs/calendar_popup_view.dart';
-import 'package:military/app/modules/home/views/tmo/title_view2.dart';
-import 'package:military/app/modules/home/views/tmo/tmo_map_view.dart';
 import 'package:military/app/ui/theme/app_theme.dart';
 
 class TmoView extends GetView<TmoController> {
   HomeController homeController = Get.find();
 
   TmoView() {
-
     controller.initTmoAnimationController(
         homeController.homeViewAnimationController!);
-
-    bool isFirst = addAllListData();
-
+    
     controller.scrollController.addListener(() {
       if (controller.scrollController.offset >= 24) {
         if (controller.topBarOpacity.value != 1.0) {
@@ -38,45 +33,6 @@ class TmoView extends GetView<TmoController> {
     });
   }
 
-  bool addAllListData() {
-    if (controller.listViews.length == controller.count) {
-      return false;
-    }
-    controller.listViews.add(TitleView2(
-        titleTxt: '서울역',
-        subTxt: 'TMO 위치선택',
-        animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
-            parent: homeController.homeViewAnimationController!,
-            curve: Interval((1 / controller.count) * 0, 1.0,
-                curve: Curves.fastOutSlowIn))),
-        animationController: homeController.homeViewAnimationController!,
-        onDetailTab: () {
-          print('test');
-        }));
-    controller.listViews.add(TmoMapView(
-      animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
-          parent: homeController.homeViewAnimationController!,
-          curve: Interval((1 / controller.count) * 2, 1.0,
-              curve: Curves.fastOutSlowIn))),
-      animationController: homeController.homeViewAnimationController!,
-    ));
-
-    return true;
-  }
-
-  void changeListData(String title) {
-    TitleView2 listData = TitleView2(
-        titleTxt: title,
-        subTxt: 'TMO 위치선택',
-        animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
-            parent: homeController.homeViewAnimationController!,
-            curve: Interval((1 / controller.count) * 0, 1.0,
-                curve: Curves.fastOutSlowIn))),
-        animationController: homeController.homeViewAnimationController!,
-        onDetailTab: () {});
-      controller.listViews[0] = listData;
-  }
-
   Future<bool> getData() async {
     await Future<dynamic>.delayed(const Duration(milliseconds: 50));
     return true;
@@ -84,6 +40,7 @@ class TmoView extends GetView<TmoController> {
 
   @override
   Widget build(BuildContext context) {
+    controller.context = context;
     return Container(
       color: AppTheme.background,
       child: Scaffold(
@@ -213,7 +170,6 @@ class TmoView extends GetView<TmoController> {
                                 ),
                                 child: GestureDetector(
                                   onTap: () {
-                                    changeListData("TTTTT");
                                     showDialog<dynamic>(
                                         context: context,
                                         builder: (BuildContext context) =>
