@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:military/app/data/model/px.dart';
 import 'package:flutter/services.dart';
+import 'package:military/app/data/model/px/px.dart';
 
 class PxProvider {
 

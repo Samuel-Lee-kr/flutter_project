@@ -3,23 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:military/app/modules/home/models/tabicon_data.dart';
 import 'package:military/app/modules/home/views/bottom_bar_view.dart';
-import 'package:military/app/modules/home/views/first_tab_view.dart';
 import 'package:military/app/modules/home/views/px_tab_view.dart';
 import 'package:military/app/modules/home/views/movie_tab_view.dart';
 import 'package:military/app/modules/home/views/tmo_view.dart';
 import 'package:military/app/ui/theme/app_theme.dart';
 import '../controllers/home_controller.dart';
+import 'foodmenu/food_menu_view.dart';
 
 class HomeView extends GetView<HomeController> {
   HomeView() {
     controller.initHomeViewAnimationController();
     controller.addClick = () {};
-    controller.tabBody = FirstTabView();
+    controller.tabBody = FoodMenuView();
     controller.changeIndex = (int index) {
 
       if (index == 0) {
         controller.homeViewAnimationController?.reverse().then<dynamic>((data) {
-          controller.tabBody = FirstTabView();
+          controller.tabBody = FoodMenuView();
           controller.update();
         });
       } else if (index == 1) {
