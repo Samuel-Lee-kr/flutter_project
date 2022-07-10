@@ -55,9 +55,6 @@ Future initializePxProduct() async {
       pxProductRepository: PxProductRepository(
         pxProductProvider: PxProductProvider(),
       ),
-      pxRepository: PxRepository(
-        pxProvider: PxProvider(),
-      )
     ),
     fenix: true,
   );
