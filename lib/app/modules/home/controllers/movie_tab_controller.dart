@@ -9,7 +9,7 @@ class MovieTabController extends GetxController
     with GetTickerProviderStateMixin {
   Animation<double>? secondTabAnimationController;
 
-  final listViews = <Widget>[].obs;
+  final movieListViews = <Widget>[].obs;
   final ScrollController scrollController = ScrollController();
   RxDouble topBarOpacity = 0.0.obs;
 
@@ -17,12 +17,12 @@ class MovieTabController extends GetxController
   final apiKey = '70e2d90e9add9ca3df9ccfc29bcef2be';
   final date = '20220618';
 
-  final movieRank = ''.obs;
-  final movieTitle = ''.obs;
-  final movieOpenDate = ''.obs;
-  final movieRandOldNew = ''.obs;
-  final movieTodayAudi = ''.obs;
-  final movieAllAudi = ''.obs;
+  // final movieRank = ''.obs;
+  // final movieTitle = ''.obs;
+  // final movieOpenDate = ''.obs;
+  // final movieRandOldNew = ''.obs;
+  // final movieTodayAudi = ''.obs;
+  // final movieAllAudi = ''.obs;
 
   final boxOfficeData = [].obs;
 

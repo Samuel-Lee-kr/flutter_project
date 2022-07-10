@@ -6,7 +6,9 @@ import 'package:military/app/modules/home/controllers/movie_tab_controller.dart'
 import 'package:military/app/modules/home/views/customs/movie_calendar_popup_view.dart';
 
 import 'package:military/app/modules/home/views/first/title_view.dart';
+import 'package:military/app/modules/home/views/movie_page/movie_title_view2.dart';
 import 'package:military/app/modules/home/views/movie_page/movie_type3_view.dart';
+import 'package:military/app/modules/home/views/movie_page/movie_title_view.dart';
 
 import 'package:military/app/ui/theme/app_theme.dart';
 
@@ -42,14 +44,14 @@ class MovieTabView extends GetView<MovieTabController> {
   }
 
   bool addAllListData() {
-    if (controller.listViews.length == controller.count) {
+    if (controller.movieListViews.length == controller.count) {
       return false;
     }
 
-    controller.listViews.add(
-      TitleView(
-        titleTxt: 'BoxOffice',
-        subTxt: 'Details',
+    controller.movieListViews.add(
+      MovieTitleView(
+        titleTxt: '박스오피스',
+        subTxt: '영화예매',
         animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
             parent: homeController.homeViewAnimationController!,
             curve: Interval((1 / controller.count) * 0, 1.0,
@@ -58,27 +60,8 @@ class MovieTabView extends GetView<MovieTabController> {
       ),
     );
 
-    // controller.listViews.add(
-    //   MovieType1View(
-    //     animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
-    //         parent: homeController.homeViewAnimationController!,
-    //         curve: Interval((1 / controller.count) * 2, 1.0,
-    //             curve: Curves.fastOutSlowIn))),
-    //     animationController: homeController.homeViewAnimationController!,
-    //   ),
-    // );
-    // controller.listViews.add(
-    //   MovieType2View(
-    //     animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
-    //         parent: homeController.homeViewAnimationController!,
-    //         curve: Interval((1 / controller.count) * 3, 1.0,
-    //             curve: Curves.fastOutSlowIn))),
-    //     animationController: homeController.homeViewAnimationController!,
-    //   ),
-    // );
-
-    controller.listViews.add(
-      TitleView(
+    controller.movieListViews.add(
+      MovieTitleView2(
         titleTxt: '오늘의 영화 순위',
         // subTxt: 'more',
         animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
@@ -89,7 +72,7 @@ class MovieTabView extends GetView<MovieTabController> {
       ),
     );
 
-    controller.listViews.add(
+    controller.movieListViews.add(
       MovieType3View(
         mainScreenAnimation: Tween<double>(begin: 0.0, end: 1.0).animate(
             CurvedAnimation(
@@ -143,11 +126,11 @@ class MovieTabView extends GetView<MovieTabController> {
                   24,
               bottom: 62 + MediaQuery.of(context).padding.bottom,
             ),
-            itemCount: controller.listViews.length,
+            itemCount: controller.movieListViews.length,
             scrollDirection: Axis.vertical,
             itemBuilder: (BuildContext context, int index) {
               homeController.homeViewAnimationController?.forward();
-              return controller.listViews[index];
+              return controller.movieListViews[index];
             },
           );
         }
