@@ -22,10 +22,13 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   final imageAssets = <Image>[].obs;
   final startDate = DateTime.now().obs;
   final endDate = DateTime.now().add(const Duration(days: 5)).obs;
+  final movieStartDate = DateTime.now().obs;
+  final movieEndDate = DateTime.now().add(const Duration(days: 0)).obs;
 
   // home_view.dart 에서 활용
   void initHomeViewAnimationController() {
-    homeViewAnimationController ??= homeViewAnimationController = AnimationController(
+    homeViewAnimationController ??=
+        homeViewAnimationController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 600),
     );
@@ -55,7 +58,8 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
 
   // bottom_bar_view.dart 에서 활용
   void initBottomBarViewAnimationController() {
-    bottomBarViewAnimationController ??= bottomBarViewAnimationController = AnimationController(
+    bottomBarViewAnimationController ??=
+        bottomBarViewAnimationController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 1000),
     );

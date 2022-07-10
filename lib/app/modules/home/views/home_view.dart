@@ -5,7 +5,7 @@ import 'package:military/app/modules/home/models/tabicon_data.dart';
 import 'package:military/app/modules/home/views/bottom_bar_view.dart';
 import 'package:military/app/modules/home/views/first_tab_view.dart';
 import 'package:military/app/modules/home/views/px_tab_view.dart';
-import 'package:military/app/modules/home/views/second_tab_view.dart';
+import 'package:military/app/modules/home/views/movie_tab_view.dart';
 import 'package:military/app/modules/home/views/tmo_view.dart';
 import 'package:military/app/ui/theme/app_theme.dart';
 import '../controllers/home_controller.dart';
@@ -16,6 +16,7 @@ class HomeView extends GetView<HomeController> {
     controller.addClick = () {};
     controller.tabBody = FirstTabView();
     controller.changeIndex = (int index) {
+
       if (index == 0) {
         controller.homeViewAnimationController?.reverse().then<dynamic>((data) {
           controller.tabBody = FirstTabView();
@@ -33,7 +34,7 @@ class HomeView extends GetView<HomeController> {
         });
       } else if (index == 3) {
         controller.homeViewAnimationController?.reverse().then<dynamic>((data) {
-          controller.tabBody = SecondTabView();
+          controller.tabBody = MovieTabView();
           controller.update();
         });
       }
@@ -75,7 +76,8 @@ class HomeView extends GetView<HomeController> {
             } else {
               return Stack(
                 children: <Widget>[
-                  GetBuilder<HomeController>(builder: (_) => controller.tabBody!),
+                  GetBuilder<HomeController>(
+                      builder: (_) => controller.tabBody!),
                   bottomBar(),
                 ],
               );

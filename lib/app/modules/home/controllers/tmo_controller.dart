@@ -18,6 +18,7 @@ class TmoController extends GetxController with GetTickerProviderStateMixin {
   HomeController homeController = Get.find();
 
   final Completer<GoogleMapController> googleMapController = Completer();
+  bool isCreated = false;
 
   final ScrollController scrollController = ScrollController();
   RxDouble topBarOpacity = 0.0.obs;
@@ -60,7 +61,10 @@ class TmoController extends GetxController with GetTickerProviderStateMixin {
       initialCameraPosition:
           CameraPosition(target: LatLng(37.5552782, 126.970676), zoom: 17),
       onMapCreated: (GoogleMapController controller) {
-        googleMapController.complete(controller);
+        if(!isCreated) {
+          googleMapController.complete(controller);
+          isCreated = true;
+        }
       },
       markers: <Marker>{
         Marker(

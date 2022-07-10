@@ -4,7 +4,9 @@ import 'package:military/app/data/provider/tmo_provider.dart';
 import 'package:military/app/data/repository/px_repository.dart';
 import 'package:military/app/data/repository/tmo_repository.dart';
 import 'package:military/app/modules/home/controllers/customs/calendar_popup_controller.dart';
+import 'package:military/app/modules/home/controllers/customs/movie_calendar_popup_controller.dart';
 import 'package:military/app/modules/home/controllers/first_tab_controller.dart';
+import 'package:military/app/modules/home/controllers/movie_tab_controller.dart';
 import 'package:military/app/modules/home/controllers/second_tab_controller.dart';
 import 'package:military/app/modules/home/controllers/tmo_controller.dart';
 import '../../../data/provider/px_product_provider.dart';
@@ -42,8 +44,12 @@ Future initializePxProduct() async {
   Get.lazyPut<HomeController>(
         () => HomeController(),
   );
-
-
+  Get.lazyPut<MovieTabController>(
+      () => MovieTabController(),
+  );
+  Get.lazyPut<MovieCalendarPopupController>(
+      () => MovieCalendarPopupController(),
+    );
   Get.lazyPut(
     () => PxTabController(
       pxProductRepository: PxProductRepository(
