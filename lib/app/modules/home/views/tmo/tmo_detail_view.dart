@@ -6,11 +6,11 @@ import 'package:military/app/modules/home/controllers/tmo_controller.dart';
 import 'package:military/app/ui/theme/app_theme.dart';
 
 // MediterranesnDietView
-class TmoMapView extends GetView<TmoController> {
+class TmoDetailView extends GetView<TmoController> {
   final AnimationController? animationController;
   final Animation<double>? animation;
 
-  TmoMapView({this.animationController, this.animation});
+  TmoDetailView({this.animationController, this.animation});
 
   @override
   Widget build(BuildContext context) {
@@ -43,16 +43,70 @@ class TmoMapView extends GetView<TmoController> {
                 child: Column(
                   children: <Widget>[
                     Container(
-                      padding:
-                          const EdgeInsets.only(top: 24, left: 16, right: 16, bottom: 16),
-                      height: 400,
+                      padding: const EdgeInsets.only(
+                          top: 24, left: 16, right: 16, bottom: 16),
+                      height: 200,
                       child: Column(
                         children: [
-                          Expanded(child: Container(
-                            child: Obx(() {
-                              return controller.googleMap!.value;
-                            })
-                          )),
+                          // pstnexpln
+                          Row(
+                            children: [
+                              Expanded(child: Center(child: Text('위치 : '))),
+                              Expanded(child: Center(child: Obx(() {
+                                // return Text(controller.pstnexpln.value);
+                                return Text(
+                                    controller.selectTmo.value.pstnexpln);
+                              }))),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          // gnrltelno
+                          Row(
+                            children: [
+                              Expanded(child: Center(child: Text('전화번호 : '))),
+                              Expanded(child: Center(child: Obx(() {
+                                // return Text(controller.gnrltelno.value);
+                                return Text(
+                                    controller.selectTmo.value.gnrltelno);
+                              }))),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          // gun_telno
+                          Row(
+                            children: [
+                              Expanded(child: Center(child: Text('군번호 : '))),
+                              Expanded(child: Center(child: Obx(() {
+                                // return Text(controller.gun_telno.value
+                                //     .replaceAll(" / ", "\n"));
+                                return Text(controller.selectTmo.value.gun_telno
+                                    .replaceAll(" / ", "\n"));
+                              }))),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          // oprtime
+                          Row(
+                            children: [
+                              Expanded(child: Center(child: Text('운영 시간 : '))),
+                              Expanded(child: Center(child: Obx(() {
+                                // if (controller.oprtime.value.length < 8) {}
+                                // return Text(controller.oprtime.value.length < 10
+                                //     ? "${controller.oprtime.value.substring(0, 4)} - ${controller.oprtime.value.substring(4)}"
+                                //     : "${controller.oprtime.value.substring(0, 5)} - ${controller.oprtime.value.substring(5)}");
+                                if (controller.selectTmo.value.oprtime.length < 8) {}
+                                return Text(controller.selectTmo.value.oprtime.length < 10
+                                    ? "${controller.selectTmo.value.oprtime.substring(0, 4)} - ${controller.selectTmo.value.oprtime.substring(4)}"
+                                    : "${controller.selectTmo.value.oprtime.substring(0, 5)} - ${controller.selectTmo.value.oprtime.substring(5)}");
+                              }))),
+                            ],
+                          ),
                         ],
                       ),
                     ),

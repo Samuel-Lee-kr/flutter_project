@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:get/get.dart';
 import 'package:military/app/ui/theme/app_theme.dart';
 
 class TitleView2 extends StatelessWidget {
@@ -10,10 +9,12 @@ class TitleView2 extends StatelessWidget {
   final Animation<double>? animation;
   Function()? onDetailTab;
 
+  Function()? get detail => onDetailTab;
+
   TitleView2(
       {super.key,
-      this.titleTxt: "",
-      this.subTxt: "",
+      this.titleTxt= '',
+      this.subTxt= '',
       this.animationController,
       this.animation,
       this.onDetailTab});
@@ -54,26 +55,31 @@ class TitleView2 extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 8),
                         child: Row(
                           children: <Widget>[
-                              Text(
-                                subTxt,
-                                textAlign: TextAlign.left,
-                                style: TextStyle(
-                                  fontFamily: AppTheme.fontName,
-                                  fontWeight: FontWeight.normal,
-                                  fontSize: 16,
-                                  letterSpacing: 0.5,
-                                  color: AppTheme.nearlyDarkBlue,
-                                ),
-                              ),
-                            SizedBox(
-                              height: 38,
-                              width: 26,
-                              child: Icon(
-                                Icons.arrow_forward,
-                                color: AppTheme.darkText,
-                                size: 18,
+                            Text(
+                              subTxt,
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                fontFamily: AppTheme.fontName,
+                                fontWeight: FontWeight.normal,
+                                fontSize: 16,
+                                letterSpacing: 0.5,
+                                color: AppTheme.nearlyDarkBlue,
                               ),
                             ),
+                            subTxt == ''
+                                ? SizedBox(
+                                    height: 38,
+                                    width: 26,
+                                  )
+                                : SizedBox(
+                                    height: 38,
+                                    width: 26,
+                                    child: Icon(
+                                      Icons.arrow_forward,
+                                      color: AppTheme.darkText,
+                                      size: 18,
+                                    ),
+                                  ),
                           ],
                         ),
                       ),

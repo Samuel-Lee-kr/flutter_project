@@ -16,7 +16,7 @@ class HomeView extends GetView<HomeController> {
     controller.addClick = () {};
     controller.tabBody = FirstTabView();
     controller.changeIndex = (int index) {
-      if (index == 0 || index == 2) {
+      if (index == 0) {
         controller.homeViewAnimationController?.reverse().then<dynamic>((data) {
           controller.tabBody = FirstTabView();
           controller.update();
@@ -24,6 +24,11 @@ class HomeView extends GetView<HomeController> {
       } else if (index == 1) {
         controller.homeViewAnimationController?.reverse().then<dynamic>((data) {
           controller.tabBody = PxTabView();
+          controller.update();
+        });
+      } else if (index == 2) {
+        controller.homeViewAnimationController?.reverse().then<dynamic>((data) {
+          controller.tabBody = TmoView();
           controller.update();
         });
       } else if (index == 3) {
