@@ -19,62 +19,65 @@ class MovieType3View extends GetView<MovieTabController> {
   @override
   Widget build(BuildContext context) {
     var areaListData = controller.boxOfficeData.toList();
-    return StreamBuilder(
-        stream: controller.boxOfficeData.stream,
-        builder: (BuildContext context, snapshot) {
-          return AnimatedBuilder(
-            animation: mainScreenAnimationController!,
-            builder: (BuildContext context, Widget? child) {
-              return FadeTransition(
-                opacity: mainScreenAnimation!,
-                child: Transform(
-                  transform: Matrix4.translationValues(
-                      0.0, 30 * (1.0 - mainScreenAnimation!.value), 0.0),
-                  child: AspectRatio(
-                    aspectRatio: 1.0,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 8.0, right: 8),
-                      child: GridView(
-                        primary: false,
-                        padding: const EdgeInsets.only(
-                            left: 16, right: 16, top: 16, bottom: 16),
-                        physics: const BouncingScrollPhysics(),
-                        scrollDirection: Axis.vertical,
-                        children: List<Widget>.generate(
-                          controller.boxOfficeData.length,
-                          (int index) {
-                            final int count = controller.boxOfficeData.length;
-                            final Animation<double> animation =
-                                Tween<double>(begin: 0.0, end: 1.0).animate(
-                              CurvedAnimation(
-                                parent: controller.animationType3!,
-                                curve: Interval((1 / count) * index, 1.0,
-                                    curve: Curves.fastOutSlowIn),
-                              ),
-                            );
-                            controller.animationType3?.forward();
-                            return AreaView(
-                              moviedata: controller.boxOfficeData[index],
-                              animation: animation,
-                              animationController: controller.animationType3!,
-                            );
-                          },
-                        ),
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          mainAxisSpacing: 24.0,
-                          crossAxisSpacing: 24.0,
-                          childAspectRatio: 1.0,
+    return Container(
+      height: 600,
+      child: StreamBuilder(
+          stream: controller.boxOfficeData.stream,
+          builder: (BuildContext context, snapshot) {
+            return AnimatedBuilder(
+              animation: mainScreenAnimationController!,
+              builder: (BuildContext context, Widget? child) {
+                return FadeTransition(
+                  opacity: mainScreenAnimation!,
+                  child: Transform(
+                    transform: Matrix4.translationValues(
+                        0.0, 30 * (1.0 - mainScreenAnimation!.value), 0.0),
+                    child: AspectRatio(
+                      aspectRatio: 1.0,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 8.0, right: 8),
+                        child: GridView(
+                          primary: false,
+                          padding: const EdgeInsets.only(
+                              left: 16, right: 16, top: 16, bottom: 16),
+                          physics: const BouncingScrollPhysics(),
+                          scrollDirection: Axis.vertical,
+                          children: List<Widget>.generate(
+                            controller.boxOfficeData.length,
+                            (int index) {
+                              final int count = controller.boxOfficeData.length;
+                              final Animation<double> animation =
+                                  Tween<double>(begin: 0.0, end: 1.0).animate(
+                                CurvedAnimation(
+                                  parent: controller.animationType3!,
+                                  curve: Interval((1 / count) * index, 1.0,
+                                      curve: Curves.fastOutSlowIn),
+                                ),
+                              );
+                              controller.animationType3?.forward();
+                              return AreaView(
+                                moviedata: controller.boxOfficeData[index],
+                                animation: animation,
+                                animationController: controller.animationType3!,
+                              );
+                            },
+                          ),
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            mainAxisSpacing: 24.0,
+                            crossAxisSpacing: 24.0,
+                            childAspectRatio: 1.0,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-              );
-            },
-          );
-        });
+                );
+              },
+            );
+          }),
+    );
   }
 }
 

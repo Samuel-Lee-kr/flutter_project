@@ -4,6 +4,10 @@ import 'package:get/get.dart';
 import 'package:military/app/modules/home/controllers/home_controller.dart';
 import 'package:military/app/modules/home/controllers/tmo_controller.dart';
 import 'package:military/app/modules/home/views/customs/calendar_popup_view.dart';
+import 'package:military/app/modules/home/views/tmo/title_view2.dart';
+import 'package:military/app/modules/home/views/tmo/tmo_detail_view.dart';
+import 'package:military/app/modules/home/views/tmo/tmo_map_view.dart';
+import 'package:military/app/modules/home/views/tmo/tmo_popup_view.dart';
 import 'package:military/app/ui/theme/app_theme.dart';
 
 class TmoView extends GetView<TmoController> {
@@ -12,7 +16,9 @@ class TmoView extends GetView<TmoController> {
   TmoView() {
     controller.initTmoAnimationController(
         homeController.homeViewAnimationController!);
-    
+
+    addAllListData();
+
     controller.scrollController.addListener(() {
       if (controller.scrollController.offset >= 24) {
         if (controller.topBarOpacity.value != 1.0) {
@@ -31,6 +37,49 @@ class TmoView extends GetView<TmoController> {
         }
       }
     });
+  }
+
+  void addAllListData() {
+    // if (listViews.length == count) {
+    controller.listViews.clear();
+    // }
+
+    controller.listViews.add(TitleView2(
+        titleTxt: '서울역',
+        subTxt: 'TMO 위치선택',
+        animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
+            parent: homeController.homeViewAnimationController!,
+            curve:
+                Interval((1 / controller.count) * 0, 1.0, curve: Curves.fastOutSlowIn))),
+        animationController: homeController.homeViewAnimationController!,
+        onDetailTab: () {
+          showDialog<dynamic>(
+              context: controller.context!,
+              builder: (BuildContext context) => TmoPopupView());
+          // builder: (BuildContext context) => CalendarPopupView());
+        }));
+    controller.listViews.add(TmoMapView(
+      animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
+          parent: homeController.homeViewAnimationController!,
+          curve: Interval((1 / controller.count) * 2, 1.0, curve: Curves.fastOutSlowIn))),
+      animationController: homeController.homeViewAnimationController!,
+    ));
+
+    controller.listViews.add(TitleView2(
+        titleTxt: '상세 정보',
+        animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
+            parent: homeController.homeViewAnimationController!,
+            curve:
+                Interval((1 / controller.count) * 0, 1.0, curve: Curves.fastOutSlowIn))),
+        animationController: homeController.homeViewAnimationController!,
+        onDetailTab: () {}));
+
+    controller.listViews.add(TmoDetailView(
+      animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
+          parent: homeController.homeViewAnimationController!,
+          curve: Interval((1 / controller.count) * 2, 1.0, curve: Curves.fastOutSlowIn))),
+      animationController: homeController.homeViewAnimationController!,
+    ));
   }
 
   Future<bool> getData() async {

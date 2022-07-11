@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -8,16 +7,13 @@ import 'package:military/app/data/model/tmo/tmo.dart';
 import 'package:military/app/data/repository/tmo_repository.dart';
 import 'package:military/app/modules/home/controllers/home_controller.dart';
 import 'package:military/app/modules/home/views/tmo/title_view2.dart';
-import 'package:military/app/modules/home/views/tmo/tmo_detail_view.dart';
-import 'package:military/app/modules/home/views/tmo/tmo_map_view.dart';
-import 'package:military/app/modules/home/views/tmo/tmo_popup_view.dart';
 
 class TmoController extends GetxController with GetTickerProviderStateMixin {
   AnimationController? animationController;
   Animation<double>? tmoAnimationController;
   HomeController homeController = Get.find();
 
-  final Completer<GoogleMapController> googleMapController = Completer();
+  late Completer<GoogleMapController> googleMapController;
   bool isCreated = false;
 
   final ScrollController scrollController = ScrollController();
@@ -61,10 +57,8 @@ class TmoController extends GetxController with GetTickerProviderStateMixin {
       initialCameraPosition:
           CameraPosition(target: LatLng(37.5552782, 126.970676), zoom: 17),
       onMapCreated: (GoogleMapController controller) {
-        if(!isCreated) {
-          googleMapController.complete(controller);
-          isCreated = true;
-        }
+        googleMapController = Completer();
+        googleMapController.complete(controller);
       },
       markers: <Marker>{
         Marker(
@@ -73,7 +67,7 @@ class TmoController extends GetxController with GetTickerProviderStateMixin {
         )
       },
     ).obs;
-    addAllListData();
+    
   }
 
   Future<void> setTmoListAndMap() async {
@@ -87,49 +81,6 @@ class TmoController extends GetxController with GetTickerProviderStateMixin {
     }
     print(areaAndtmoNm);
     selectTmo.value = temp;
-  }
-
-  void addAllListData() {
-    if (listViews.length == count) {
-      listViews.clear();
-    }
-
-    listViews.add(TitleView2(
-        titleTxt: '서울역',
-        subTxt: 'TMO 위치선택',
-        animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
-            parent: homeController.homeViewAnimationController!,
-            curve:
-                Interval((1 / count) * 0, 1.0, curve: Curves.fastOutSlowIn))),
-        animationController: homeController.homeViewAnimationController!,
-        onDetailTab: () {
-          showDialog<dynamic>(
-              context: context!,
-              builder: (BuildContext context) => TmoPopupView());
-          // builder: (BuildContext context) => CalendarPopupView());
-        }));
-    listViews.add(TmoMapView(
-      animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
-          parent: homeController.homeViewAnimationController!,
-          curve: Interval((1 / count) * 2, 1.0, curve: Curves.fastOutSlowIn))),
-      animationController: homeController.homeViewAnimationController!,
-    ));
-
-    listViews.add(TitleView2(
-        titleTxt: '상세 정보',
-        animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
-            parent: homeController.homeViewAnimationController!,
-            curve:
-                Interval((1 / count) * 0, 1.0, curve: Curves.fastOutSlowIn))),
-        animationController: homeController.homeViewAnimationController!,
-        onDetailTab: () {}));
-
-    listViews.add(TmoDetailView(
-      animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
-          parent: homeController.homeViewAnimationController!,
-          curve: Interval((1 / count) * 2, 1.0, curve: Curves.fastOutSlowIn))),
-      animationController: homeController.homeViewAnimationController!,
-    ));
   }
 
   void initTmoAnimationController(
@@ -148,6 +99,7 @@ class TmoController extends GetxController with GetTickerProviderStateMixin {
     googleMap!.value = GoogleMap(
       initialCameraPosition: CameraPosition(target: LatLng(lat, lan), zoom: 17),
       onMapCreated: (GoogleMapController controller) {
+        googleMapController = Completer();
         googleMapController.complete(controller);
       },
       markers: <Marker>{
