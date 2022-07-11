@@ -19,34 +19,33 @@ class MovieTabView extends GetView<MovieTabController> {
     controller.initSecondTabAnimationController(
         homeController.homeViewAnimationController!);
     controller.movieDataHttp();
-    bool isFirst = addAllListData();
+    addAllListData();
 
-    if (isFirst) {
-      controller.scrollController.addListener(() {
-        if (controller.scrollController.offset >= 24) {
-          if (controller.topBarOpacity.value != 1.0) {
-            controller.topBarOpacity.value = 1.0;
-          }
-        } else if (controller.scrollController.offset <= 24 &&
-            controller.scrollController.offset >= 0) {
-          if (controller.topBarOpacity.value !=
-              controller.scrollController.offset / 24) {
-            controller.topBarOpacity.value =
-                controller.scrollController.offset / 24;
-          }
-        } else if (controller.scrollController.offset <= 0) {
-          if (controller.topBarOpacity.value != 0.0) {
-            controller.topBarOpacity.value = 0.0;
-          }
+    controller.scrollController.addListener(() {
+      if (controller.scrollController.offset >= 24) {
+        if (controller.topBarOpacity.value != 1.0) {
+          controller.topBarOpacity.value = 1.0;
         }
-      });
-    }
+      } else if (controller.scrollController.offset <= 24 &&
+          controller.scrollController.offset >= 0) {
+        if (controller.topBarOpacity.value !=
+            controller.scrollController.offset / 24) {
+          controller.topBarOpacity.value =
+              controller.scrollController.offset / 24;
+        }
+      } else if (controller.scrollController.offset <= 0) {
+        if (controller.topBarOpacity.value != 0.0) {
+          controller.topBarOpacity.value = 0.0;
+        }
+      }
+    });
   }
 
-  bool addAllListData() {
-    if (controller.movieListViews.length == controller.count) {
-      return false;
-    }
+  void addAllListData() {
+    // if (controller.movieListViews.length == controller.count) {
+    controller.movieListViews.clear();
+    // return false;
+    // }
 
     controller.movieListViews.add(
       MovieTitleView(
@@ -84,7 +83,7 @@ class MovieTabView extends GetView<MovieTabController> {
       ),
     );
 
-    return true;
+    // return true;
   }
 
   Future<bool> getData() async {
