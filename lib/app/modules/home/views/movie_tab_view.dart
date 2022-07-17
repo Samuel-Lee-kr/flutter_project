@@ -2,21 +2,23 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:military/app/modules/home/controllers/home_controller.dart';
-import 'package:military/app/modules/home/controllers/tmo_controller.dart';
-import 'package:military/app/modules/home/views/customs/calendar_popup_view.dart';
-import 'package:military/app/modules/home/views/tmo/title_view2.dart';
-import 'package:military/app/modules/home/views/tmo/tmo_detail_view.dart';
-import 'package:military/app/modules/home/views/tmo/tmo_map_view.dart';
-import 'package:military/app/modules/home/views/tmo/tmo_popup_view.dart';
+import 'package:military/app/modules/home/controllers/movie_tab_controller.dart';
+import 'package:military/app/modules/home/views/customs/movie_calendar_popup_view.dart';
+
+import 'package:military/app/modules/home/views/first/title_view.dart';
+import 'package:military/app/modules/home/views/movie_page/movie_title_view2.dart';
+import 'package:military/app/modules/home/views/movie_page/movie_type3_view.dart';
+import 'package:military/app/modules/home/views/movie_page/movie_title_view.dart';
+
 import 'package:military/app/ui/theme/app_theme.dart';
 
-class TmoView extends GetView<TmoController> {
+class MovieTabView extends GetView<MovieTabController> {
   HomeController homeController = Get.find();
 
-  TmoView() {
-    controller.initTmoAnimationController(
+  MovieTabView() {
+    controller.initSecondTabAnimationController(
         homeController.homeViewAnimationController!);
-
+    controller.movieDataHttp();
     addAllListData();
 
     controller.scrollController.addListener(() {
@@ -40,46 +42,48 @@ class TmoView extends GetView<TmoController> {
   }
 
   void addAllListData() {
-    // if (listViews.length == count) {
-    controller.listViews.clear();
+    // if (controller.movieListViews.length == controller.count) {
+    controller.movieListViews.clear();
+    // return false;
     // }
 
-    controller.listViews.add(TitleView2(
-        titleTxt: '서울역',
-        subTxt: 'TMO 위치선택',
+    controller.movieListViews.add(
+      MovieTitleView(
+        titleTxt: '박스오피스',
+        subTxt: '영화예매',
         animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
             parent: homeController.homeViewAnimationController!,
-            curve:
-                Interval((1 / controller.count) * 0, 1.0, curve: Curves.fastOutSlowIn))),
+            curve: Interval((1 / controller.count) * 0, 1.0,
+                curve: Curves.fastOutSlowIn))),
         animationController: homeController.homeViewAnimationController!,
-        onDetailTab: () {
-          showDialog<dynamic>(
-              context: controller.context!,
-              builder: (BuildContext context) => TmoPopupView());
-          // builder: (BuildContext context) => CalendarPopupView());
-        }));
-    controller.listViews.add(TmoMapView(
-      animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
-          parent: homeController.homeViewAnimationController!,
-          curve: Interval((1 / controller.count) * 2, 1.0, curve: Curves.fastOutSlowIn))),
-      animationController: homeController.homeViewAnimationController!,
-    ));
+      ),
+    );
 
-    controller.listViews.add(TitleView2(
-        titleTxt: '상세 정보',
+    controller.movieListViews.add(
+      MovieTitleView2(
+        titleTxt: '오늘의 영화 순위',
+        // subTxt: 'more',
         animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
             parent: homeController.homeViewAnimationController!,
-            curve:
-                Interval((1 / controller.count) * 0, 1.0, curve: Curves.fastOutSlowIn))),
+            curve: Interval((1 / controller.count) * 4, 1.0,
+                curve: Curves.fastOutSlowIn))),
         animationController: homeController.homeViewAnimationController!,
-        onDetailTab: () {}));
+      ),
+    );
 
-    controller.listViews.add(TmoDetailView(
-      animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
-          parent: homeController.homeViewAnimationController!,
-          curve: Interval((1 / controller.count) * 2, 1.0, curve: Curves.fastOutSlowIn))),
-      animationController: homeController.homeViewAnimationController!,
-    ));
+    controller.movieListViews.add(
+      MovieType3View(
+        mainScreenAnimation: Tween<double>(begin: 0.0, end: 1.0).animate(
+            CurvedAnimation(
+                parent: homeController.homeViewAnimationController!,
+                curve: Interval((1 / controller.count) * 5, 1.0,
+                    curve: Curves.fastOutSlowIn))),
+        mainScreenAnimationController:
+            homeController.homeViewAnimationController!,
+      ),
+    );
+
+    // return true;
   }
 
   Future<bool> getData() async {
@@ -89,7 +93,6 @@ class TmoView extends GetView<TmoController> {
 
   @override
   Widget build(BuildContext context) {
-    controller.context = context;
     return Container(
       color: AppTheme.background,
       child: Scaffold(
@@ -122,13 +125,11 @@ class TmoView extends GetView<TmoController> {
                   24,
               bottom: 62 + MediaQuery.of(context).padding.bottom,
             ),
-            itemCount: controller.listViews.length,
+            itemCount: controller.movieListViews.length,
             scrollDirection: Axis.vertical,
             itemBuilder: (BuildContext context, int index) {
               homeController.homeViewAnimationController?.forward();
-              return Obx(() {
-                return controller.listViews[index];
-              });
+              return controller.movieListViews[index];
             },
           );
         }
@@ -143,10 +144,12 @@ class TmoView extends GetView<TmoController> {
           animation: homeController.homeViewAnimationController!,
           builder: (BuildContext context, Widget? child) {
             return FadeTransition(
-              opacity: controller.tmoAnimationController!,
+              opacity: controller.secondTabAnimationController!,
               child: Transform(
-                transform: Matrix4.translationValues(0.0,
-                    30 * (1.0 - controller.tmoAnimationController!.value), 0.0),
+                transform: Matrix4.translationValues(
+                    0.0,
+                    30 * (1.0 - controller.secondTabAnimationController!.value),
+                    0.0),
                 child: Obx(() {
                   return Container(
                     decoration: BoxDecoration(
@@ -182,7 +185,7 @@ class TmoView extends GetView<TmoController> {
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
-                                    'TMO',
+                                    'Movie Tab',
                                     textAlign: TextAlign.left,
                                     style: TextStyle(
                                       fontFamily: AppTheme.fontName,
@@ -222,7 +225,7 @@ class TmoView extends GetView<TmoController> {
                                     showDialog<dynamic>(
                                         context: context,
                                         builder: (BuildContext context) =>
-                                            CalendarPopupView());
+                                            MovieCalendarPopupView());
                                   },
                                   child: Row(
                                     children: <Widget>[

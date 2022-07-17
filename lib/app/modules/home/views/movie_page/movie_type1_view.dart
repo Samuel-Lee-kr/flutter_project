@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+
 import 'package:get/get.dart';
 import 'package:military/app/ui/theme/app_theme.dart';
 import 'package:military/main.dart';
 
-class SecondType1View extends GetView {
+class MovieType1View extends GetView {
   final AnimationController? animationController;
   final Animation<double>? animation;
 
-  SecondType1View({this.animationController, this.animation});
+  MovieType1View({this.animationController, this.animation});
 
   @override
   Widget build(BuildContext context) {
@@ -18,34 +19,26 @@ class SecondType1View extends GetView {
           opacity: animation!,
           child: Transform(
             transform: Matrix4.translationValues(
-              0.0,
-              30 * (1.0 - animation!.value),
-              0.0,
-            ),
+                0.0, 30 * (1.0 - animation!.value), 0.0),
             child: Padding(
-              padding: const EdgeInsets.only(left: 24, right: 24, top: 16, bottom: 18),
+              padding: const EdgeInsets.only(
+                  left: 24, right: 24, top: 16, bottom: 18),
               child: Container(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [
-                      AppTheme.nearlyDarkBlue,
-                      HexColor("#6F56E8"),
-                    ],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
+                      colors: [AppTheme.nearlyDarkBlue, HexColor("#6F56E8")],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight),
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(8.0),
-                    bottomLeft: Radius.circular(8.0),
-                    bottomRight: Radius.circular(8.0),
-                    topRight: Radius.circular(68.0),
-                  ),
-                  boxShadow: [
+                      topLeft: Radius.circular(8.0),
+                      bottomLeft: Radius.circular(8.0),
+                      bottomRight: Radius.circular(8.0),
+                      topRight: Radius.circular(68.0)),
+                  boxShadow: <BoxShadow>[
                     BoxShadow(
-                      color: AppTheme.grey.withOpacity(0.6),
-                      offset: Offset(1.1, 1.1),
-                      blurRadius: 10.0,
-                    ),
+                        color: AppTheme.grey.withOpacity(0.6),
+                        offset: Offset(1.1, 1.1),
+                        blurRadius: 10.0),
                   ],
                 ),
                 child: Padding(
@@ -87,7 +80,7 @@ class SecondType1View extends GetView {
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
+                          children: <Widget>[
                             Padding(
                               padding: const EdgeInsets.only(left: 4),
                               child: Icon(
@@ -110,17 +103,19 @@ class SecondType1View extends GetView {
                                 ),
                               ),
                             ),
-                            Expanded(child: SizedBox()),
+                            Expanded(
+                              child: SizedBox(),
+                            ),
                             Container(
                               decoration: BoxDecoration(
                                 color: AppTheme.nearlyWhite,
                                 shape: BoxShape.circle,
-                                boxShadow: [
+                                boxShadow: <BoxShadow>[
                                   BoxShadow(
-                                    color: AppTheme.nearlyBlack.withOpacity(0.4),
-                                    offset: Offset(8.0, 8.0),
-                                    blurRadius: 8.0,
-                                  ),
+                                      color:
+                                          AppTheme.nearlyBlack.withOpacity(0.4),
+                                      offset: Offset(8.0, 8.0),
+                                      blurRadius: 8.0),
                                 ],
                               ),
                               child: Padding(

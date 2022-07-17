@@ -11,7 +11,7 @@ class FoodMenuProvider {
 
   Future<List<FoodMenuInfo>> getAll() async {
     final result11 =
-        await rootBundle.loadString('assets/data/heechan_sample2.json');
+        await rootBundle.loadString('assets/data/heechan_sample.json');
     Map<String, dynamic> res12 = json.decode(result11);
     //  HType2Data = HType2Data.tabIconsList[0];
     //return res12.map((e) => FoodMenuInfo.fromJson(e)).toList();

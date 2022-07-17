@@ -5,12 +5,6 @@ import 'package:intl/intl.dart';
 import 'package:military/app/modules/home/controllers/first_tab_controller.dart';
 import 'package:military/app/modules/home/controllers/home_controller.dart';
 import 'package:military/app/modules/home/views/customs/calendar_popup_view.dart';
-import 'package:military/app/modules/home/views/first/first_type_1_view.dart';
-import 'package:military/app/modules/home/views/first/first_type_2_view.dart';
-import 'package:military/app/modules/home/views/first/first_type_3_view.dart';
-import 'package:military/app/modules/home/views/first/first_type_4_view.dart';
-import 'package:military/app/modules/home/views/first/first_type_5_view.dart';
-import 'package:military/app/modules/home/views/first/title_view.dart';
 import 'package:military/app/modules/home/views/foodmenu/components/additional_message.dart';
 import 'package:military/app/modules/home/views/foodmenu/components/food_menu_detail.dart';
 import 'package:military/app/modules/home/views/foodmenu/components/my_body_info.dart';
@@ -25,34 +19,34 @@ class FoodMenuView extends GetView<FoodMenuController> {
   FoodMenuView() {
     controller.initFirstTabAnimationController(
         homeController.homeViewAnimationController!);
-    bool isFirst = addAllListData();
 
-    if (isFirst) {
-      controller.scrollController.addListener(() {
-        if (controller.scrollController.offset >= 24) {
-          if (controller.topBarOpacity.value != 1.0) {
-            controller.topBarOpacity.value = 1.0;
-          }
-        } else if (controller.scrollController.offset <= 24 &&
-            controller.scrollController.offset >= 0) {
-          if (controller.topBarOpacity.value !=
-              controller.scrollController.offset / 24) {
-            controller.topBarOpacity.value =
-                controller.scrollController.offset / 24;
-          }
-        } else if (controller.scrollController.offset <= 0) {
-          if (controller.topBarOpacity.value != 0.0) {
-            controller.topBarOpacity.value = 0.0;
-          }
+    addAllListData();
+
+    controller.scrollController.addListener(() {
+      if (controller.scrollController.offset >= 24) {
+        if (controller.topBarOpacity.value != 1.0) {
+          controller.topBarOpacity.value = 1.0;
         }
-      });
-    }
+      } else if (controller.scrollController.offset <= 24 &&
+          controller.scrollController.offset >= 0) {
+        if (controller.topBarOpacity.value !=
+            controller.scrollController.offset / 24) {
+          controller.topBarOpacity.value =
+              controller.scrollController.offset / 24;
+        }
+      } else if (controller.scrollController.offset <= 0) {
+        if (controller.topBarOpacity.value != 0.0) {
+          controller.topBarOpacity.value = 0.0;
+        }
+      }
+    });
   }
 
-  bool addAllListData() {
-    if (controller.listViews.length == controller.count) {
-      return false;
-    }
+  void addAllListData() {
+    // if (controller.listViews.length == controller.count) {
+    // return false;
+    controller.listViews.clear();
+    // }
     /*
     controller.listViews.add(
       TitleView(
@@ -119,7 +113,7 @@ class FoodMenuView extends GetView<FoodMenuController> {
       ),
     );
 
-    return true;
+    // return true;
   }
 
   Future<bool> getData() async {

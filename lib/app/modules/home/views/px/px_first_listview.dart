@@ -3,11 +3,11 @@ import 'package:get/get.dart';
 import 'package:military/app/ui/theme/app_theme.dart';
 import 'package:military/main.dart';
 
-class SecondType1View extends GetView {
+class PxFirstListView extends GetView {
   final AnimationController? animationController;
   final Animation<double>? animation;
 
-  SecondType1View({this.animationController, this.animation});
+  PxFirstListView({this.animationController, this.animation});
 
   @override
   Widget build(BuildContext context) {
@@ -55,33 +55,49 @@ class SecondType1View extends GetView {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        'Next workout',
+                        '제6사단 나누리',
                         textAlign: TextAlign.left,
                         style: TextStyle(
                           fontFamily: AppTheme.fontName,
                           fontWeight: FontWeight.normal,
-                          fontSize: 14,
+                          fontSize: 22,
                           letterSpacing: 0.0,
                           color: AppTheme.white,
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 8.0),
-                        child: const Text(
-                          'Legs Toning and\nGlutes Workout at Home',
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            fontFamily: AppTheme.fontName,
-                            fontWeight: FontWeight.normal,
-                            fontSize: 20,
-                            letterSpacing: 0.0,
-                            color: AppTheme.white,
-                          ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(height: 10),
+                            Text(
+                              '마음껏 먹고,',
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                fontFamily: AppTheme.fontName,
+                                fontWeight: FontWeight.normal,
+                                fontSize: 18,
+                                letterSpacing: 0.0,
+                                color: AppTheme.white,
+                              ),
+                            ),
+                            SizedBox(height: 10),
+                            Text(
+                              '사랑하는 국민을 지키자.',
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                fontFamily: AppTheme.fontName,
+                                fontWeight: FontWeight.normal,
+                                fontSize: 18,
+                                letterSpacing: 0.0,
+                                color: AppTheme.white,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      SizedBox(
-                        height: 32,
-                      ),
+                      SizedBox(height: 14),
                       Padding(
                         padding: const EdgeInsets.only(right: 4),
                         child: Row(
@@ -91,20 +107,20 @@ class SecondType1View extends GetView {
                             Padding(
                               padding: const EdgeInsets.only(left: 4),
                               child: Icon(
-                                Icons.timer,
+                                Icons.linked_camera_outlined,
                                 color: AppTheme.white,
-                                size: 16,
+                                size: 20,
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(left: 4.0),
+                              padding: const EdgeInsets.only(left: 8.0),
                               child: const Text(
-                                '68 min',
+                                '5,000명이 함께',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontFamily: AppTheme.fontName,
                                   fontWeight: FontWeight.w500,
-                                  fontSize: 14,
+                                  fontSize: 16,
                                   letterSpacing: 0.0,
                                   color: AppTheme.white,
                                 ),
@@ -126,9 +142,9 @@ class SecondType1View extends GetView {
                               child: Padding(
                                 padding: const EdgeInsets.all(0.0),
                                 child: Icon(
-                                  Icons.arrow_right,
+                                  Icons.add,
                                   color: HexColor("#6F56E8"),
-                                  size: 44,
+                                  size: 36,
                                 ),
                               ),
                             )

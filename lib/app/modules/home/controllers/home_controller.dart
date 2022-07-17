@@ -16,12 +16,12 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   final tabList = <TabIcons>[].obs;
 
   List<AnimationController> tabAnimations = [];
-  List<Function()?> removeAllSelect = [];
-  final imageAssets = <Image>[].obs;
 
+  List<Function()?> removeAllSelect = [];
+
+  final imageAssets = <Image>[].obs;
   final startDate = DateTime.now().obs;
   final endDate = DateTime.now().add(const Duration(days: 5)).obs;
-
   final movieStartDate = DateTime.now().obs;
   final movieEndDate = DateTime.now().add(const Duration(days: 0)).obs;
 
@@ -39,17 +39,21 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     tabIconsList[index].animationController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 400),
-    )..addStatusListener((AnimationStatus status) {
-        if (status == AnimationStatus.completed) {
-          removeAllSelect[index]!();
-          tabIconsList[index].animationController?.reverse();
-          for (int i = 0; i < imageAssets.length; i++) {
-            imageAssets[i] = Image.asset(tabIconsList[i].isSelected
-                ? tabIconsList[i].selectedImagePath
-                : tabIconsList[i].imagePath);
+    )..addStatusListener(
+        (AnimationStatus status) {
+          if (status == AnimationStatus.completed) {
+            removeAllSelect[index]!();
+            tabIconsList[index].animationController?.reverse();
+            for (int i = 0; i < imageAssets.length; i++) {
+              imageAssets[i] = Image.asset(
+                tabIconsList[i].isSelected
+                    ? tabIconsList[i].selectedImagePath
+                    : tabIconsList[i].imagePath,
+              );
+            }
           }
-        }
-      });
+        },
+      );
   }
 
   // bottom_bar_view.dart 에서 활용
@@ -62,16 +66,16 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     bottomBarViewAnimationController?.forward();
   }
 
-  // @override
-  // void onInit() {
-  //   super.onInit();
-  // }
+// @override
+// void onInit() {
+//   super.onInit();
+// }
 
-  // @override
-  // void onReady() {
-  //   super.onReady();
-  // }
+// @override
+// void onReady() {
+//   super.onReady();
+// }
 
-  // @override
-  // void onClose() {}
+// @override
+// void onClose() {}
 }
