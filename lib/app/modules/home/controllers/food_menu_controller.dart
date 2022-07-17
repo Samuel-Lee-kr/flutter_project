@@ -18,6 +18,40 @@ class FoodMenuController extends GetxController
   final listViews = <Widget>[].obs;
   final ScrollController scrollController = ScrollController();
   RxDouble topBarOpacity = 0.0.obs;
+  final _startDate = DateTime.now().obs;
+  get startDate => this._startDate;
+  set startDate(value) => this._startDate.value = value;
+
+  final _myheight = '0'.obs;
+  get myheight => this._myheight;
+  set myheight(value) {
+    this._myheight.value = value;
+    calMyBmi();
+  }
+
+  final _myweight = '0'.obs;
+  get myweight => this._myweight;
+  set myweight(value) {
+    this._myweight.value = value;
+    calMyBmi();
+  }
+
+  final _mybmi = '0'.obs;
+  get mybmi => this._mybmi;
+  set mybmi(value) => this._mybmi.value = value;
+
+  final _mybodyfat = '0'.obs;
+  get mybodyfat => this._mybodyfat;
+  set mybodyfat(value) => this._mybodyfat.value = value;
+
+  void calMyBmi() {
+    print(int.parse(myheight.value) / int.parse(myweight.value));
+    mybmi.value = (int.parse(myheight.value) / int.parse(myweight.value))
+        .toStringAsFixed(1);
+    mybodyfat.value =
+        (int.parse(myheight.value) / int.parse(myweight.value) * 100)
+            .toStringAsFixed(1);
+  }
 
   final FoodMenuRepository foodMenuRepository;
 

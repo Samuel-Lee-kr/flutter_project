@@ -23,17 +23,29 @@ class _$FoodMenuInfoTearOff {
   const _$FoodMenuInfoTearOff();
 
   _FoodMenuInfo call(
-      {required String imagePath,
-      required String titleTxt,
-      required String kacl,
-      required List<String> meals,
-      required String startColor,
-      required String endColor}) {
+      {required String dates,
+      required String brst,
+      required String brst_cal,
+      required String lunc,
+      required String lunc_cal,
+      required String dinr,
+      required String dinr_cal,
+      required String sum_cal,
+      String? adspcfd,
+      String? adspcfd_cal,
+      String? startColor,
+      String? endColor}) {
     return _FoodMenuInfo(
-      imagePath: imagePath,
-      titleTxt: titleTxt,
-      kacl: kacl,
-      meals: meals,
+      dates: dates,
+      brst: brst,
+      brst_cal: brst_cal,
+      lunc: lunc,
+      lunc_cal: lunc_cal,
+      dinr: dinr,
+      dinr_cal: dinr_cal,
+      sum_cal: sum_cal,
+      adspcfd: adspcfd,
+      adspcfd_cal: adspcfd_cal,
       startColor: startColor,
       endColor: endColor,
     );
@@ -49,12 +61,18 @@ const $FoodMenuInfo = _$FoodMenuInfoTearOff();
 
 /// @nodoc
 mixin _$FoodMenuInfo {
-  String get imagePath => throw _privateConstructorUsedError;
-  String get titleTxt => throw _privateConstructorUsedError;
-  String get kacl => throw _privateConstructorUsedError;
-  List<String> get meals => throw _privateConstructorUsedError;
-  String get startColor => throw _privateConstructorUsedError;
-  String get endColor => throw _privateConstructorUsedError;
+  String get dates => throw _privateConstructorUsedError;
+  String get brst => throw _privateConstructorUsedError;
+  String get brst_cal => throw _privateConstructorUsedError;
+  String get lunc => throw _privateConstructorUsedError;
+  String get lunc_cal => throw _privateConstructorUsedError;
+  String get dinr => throw _privateConstructorUsedError;
+  String get dinr_cal => throw _privateConstructorUsedError;
+  String get sum_cal => throw _privateConstructorUsedError;
+  String? get adspcfd => throw _privateConstructorUsedError;
+  String? get adspcfd_cal => throw _privateConstructorUsedError;
+  String? get startColor => throw _privateConstructorUsedError;
+  String? get endColor => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -68,12 +86,18 @@ abstract class $FoodMenuInfoCopyWith<$Res> {
           FoodMenuInfo value, $Res Function(FoodMenuInfo) then) =
       _$FoodMenuInfoCopyWithImpl<$Res>;
   $Res call(
-      {String imagePath,
-      String titleTxt,
-      String kacl,
-      List<String> meals,
-      String startColor,
-      String endColor});
+      {String dates,
+      String brst,
+      String brst_cal,
+      String lunc,
+      String lunc_cal,
+      String dinr,
+      String dinr_cal,
+      String sum_cal,
+      String? adspcfd,
+      String? adspcfd_cal,
+      String? startColor,
+      String? endColor});
 }
 
 /// @nodoc
@@ -86,38 +110,68 @@ class _$FoodMenuInfoCopyWithImpl<$Res> implements $FoodMenuInfoCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? imagePath = freezed,
-    Object? titleTxt = freezed,
-    Object? kacl = freezed,
-    Object? meals = freezed,
+    Object? dates = freezed,
+    Object? brst = freezed,
+    Object? brst_cal = freezed,
+    Object? lunc = freezed,
+    Object? lunc_cal = freezed,
+    Object? dinr = freezed,
+    Object? dinr_cal = freezed,
+    Object? sum_cal = freezed,
+    Object? adspcfd = freezed,
+    Object? adspcfd_cal = freezed,
     Object? startColor = freezed,
     Object? endColor = freezed,
   }) {
     return _then(_value.copyWith(
-      imagePath: imagePath == freezed
-          ? _value.imagePath
-          : imagePath // ignore: cast_nullable_to_non_nullable
+      dates: dates == freezed
+          ? _value.dates
+          : dates // ignore: cast_nullable_to_non_nullable
               as String,
-      titleTxt: titleTxt == freezed
-          ? _value.titleTxt
-          : titleTxt // ignore: cast_nullable_to_non_nullable
+      brst: brst == freezed
+          ? _value.brst
+          : brst // ignore: cast_nullable_to_non_nullable
               as String,
-      kacl: kacl == freezed
-          ? _value.kacl
-          : kacl // ignore: cast_nullable_to_non_nullable
+      brst_cal: brst_cal == freezed
+          ? _value.brst_cal
+          : brst_cal // ignore: cast_nullable_to_non_nullable
               as String,
-      meals: meals == freezed
-          ? _value.meals
-          : meals // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+      lunc: lunc == freezed
+          ? _value.lunc
+          : lunc // ignore: cast_nullable_to_non_nullable
+              as String,
+      lunc_cal: lunc_cal == freezed
+          ? _value.lunc_cal
+          : lunc_cal // ignore: cast_nullable_to_non_nullable
+              as String,
+      dinr: dinr == freezed
+          ? _value.dinr
+          : dinr // ignore: cast_nullable_to_non_nullable
+              as String,
+      dinr_cal: dinr_cal == freezed
+          ? _value.dinr_cal
+          : dinr_cal // ignore: cast_nullable_to_non_nullable
+              as String,
+      sum_cal: sum_cal == freezed
+          ? _value.sum_cal
+          : sum_cal // ignore: cast_nullable_to_non_nullable
+              as String,
+      adspcfd: adspcfd == freezed
+          ? _value.adspcfd
+          : adspcfd // ignore: cast_nullable_to_non_nullable
+              as String?,
+      adspcfd_cal: adspcfd_cal == freezed
+          ? _value.adspcfd_cal
+          : adspcfd_cal // ignore: cast_nullable_to_non_nullable
+              as String?,
       startColor: startColor == freezed
           ? _value.startColor
           : startColor // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       endColor: endColor == freezed
           ? _value.endColor
           : endColor // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -130,12 +184,18 @@ abstract class _$FoodMenuInfoCopyWith<$Res>
       __$FoodMenuInfoCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String imagePath,
-      String titleTxt,
-      String kacl,
-      List<String> meals,
-      String startColor,
-      String endColor});
+      {String dates,
+      String brst,
+      String brst_cal,
+      String lunc,
+      String lunc_cal,
+      String dinr,
+      String dinr_cal,
+      String sum_cal,
+      String? adspcfd,
+      String? adspcfd_cal,
+      String? startColor,
+      String? endColor});
 }
 
 /// @nodoc
@@ -150,38 +210,68 @@ class __$FoodMenuInfoCopyWithImpl<$Res> extends _$FoodMenuInfoCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? imagePath = freezed,
-    Object? titleTxt = freezed,
-    Object? kacl = freezed,
-    Object? meals = freezed,
+    Object? dates = freezed,
+    Object? brst = freezed,
+    Object? brst_cal = freezed,
+    Object? lunc = freezed,
+    Object? lunc_cal = freezed,
+    Object? dinr = freezed,
+    Object? dinr_cal = freezed,
+    Object? sum_cal = freezed,
+    Object? adspcfd = freezed,
+    Object? adspcfd_cal = freezed,
     Object? startColor = freezed,
     Object? endColor = freezed,
   }) {
     return _then(_FoodMenuInfo(
-      imagePath: imagePath == freezed
-          ? _value.imagePath
-          : imagePath // ignore: cast_nullable_to_non_nullable
+      dates: dates == freezed
+          ? _value.dates
+          : dates // ignore: cast_nullable_to_non_nullable
               as String,
-      titleTxt: titleTxt == freezed
-          ? _value.titleTxt
-          : titleTxt // ignore: cast_nullable_to_non_nullable
+      brst: brst == freezed
+          ? _value.brst
+          : brst // ignore: cast_nullable_to_non_nullable
               as String,
-      kacl: kacl == freezed
-          ? _value.kacl
-          : kacl // ignore: cast_nullable_to_non_nullable
+      brst_cal: brst_cal == freezed
+          ? _value.brst_cal
+          : brst_cal // ignore: cast_nullable_to_non_nullable
               as String,
-      meals: meals == freezed
-          ? _value.meals
-          : meals // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+      lunc: lunc == freezed
+          ? _value.lunc
+          : lunc // ignore: cast_nullable_to_non_nullable
+              as String,
+      lunc_cal: lunc_cal == freezed
+          ? _value.lunc_cal
+          : lunc_cal // ignore: cast_nullable_to_non_nullable
+              as String,
+      dinr: dinr == freezed
+          ? _value.dinr
+          : dinr // ignore: cast_nullable_to_non_nullable
+              as String,
+      dinr_cal: dinr_cal == freezed
+          ? _value.dinr_cal
+          : dinr_cal // ignore: cast_nullable_to_non_nullable
+              as String,
+      sum_cal: sum_cal == freezed
+          ? _value.sum_cal
+          : sum_cal // ignore: cast_nullable_to_non_nullable
+              as String,
+      adspcfd: adspcfd == freezed
+          ? _value.adspcfd
+          : adspcfd // ignore: cast_nullable_to_non_nullable
+              as String?,
+      adspcfd_cal: adspcfd_cal == freezed
+          ? _value.adspcfd_cal
+          : adspcfd_cal // ignore: cast_nullable_to_non_nullable
+              as String?,
       startColor: startColor == freezed
           ? _value.startColor
           : startColor // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       endColor: endColor == freezed
           ? _value.endColor
           : endColor // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -190,32 +280,50 @@ class __$FoodMenuInfoCopyWithImpl<$Res> extends _$FoodMenuInfoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_FoodMenuInfo implements _FoodMenuInfo {
   _$_FoodMenuInfo(
-      {required this.imagePath,
-      required this.titleTxt,
-      required this.kacl,
-      required this.meals,
-      required this.startColor,
-      required this.endColor});
+      {required this.dates,
+      required this.brst,
+      required this.brst_cal,
+      required this.lunc,
+      required this.lunc_cal,
+      required this.dinr,
+      required this.dinr_cal,
+      required this.sum_cal,
+      this.adspcfd,
+      this.adspcfd_cal,
+      this.startColor,
+      this.endColor});
 
   factory _$_FoodMenuInfo.fromJson(Map<String, dynamic> json) =>
       _$$_FoodMenuInfoFromJson(json);
 
   @override
-  final String imagePath;
+  final String dates;
   @override
-  final String titleTxt;
+  final String brst;
   @override
-  final String kacl;
+  final String brst_cal;
   @override
-  final List<String> meals;
+  final String lunc;
   @override
-  final String startColor;
+  final String lunc_cal;
   @override
-  final String endColor;
+  final String dinr;
+  @override
+  final String dinr_cal;
+  @override
+  final String sum_cal;
+  @override
+  final String? adspcfd;
+  @override
+  final String? adspcfd_cal;
+  @override
+  final String? startColor;
+  @override
+  final String? endColor;
 
   @override
   String toString() {
-    return 'FoodMenuInfo(imagePath: $imagePath, titleTxt: $titleTxt, kacl: $kacl, meals: $meals, startColor: $startColor, endColor: $endColor)';
+    return 'FoodMenuInfo(dates: $dates, brst: $brst, brst_cal: $brst_cal, lunc: $lunc, lunc_cal: $lunc_cal, dinr: $dinr, dinr_cal: $dinr_cal, sum_cal: $sum_cal, adspcfd: $adspcfd, adspcfd_cal: $adspcfd_cal, startColor: $startColor, endColor: $endColor)';
   }
 
   @override
@@ -223,10 +331,17 @@ class _$_FoodMenuInfo implements _FoodMenuInfo {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _FoodMenuInfo &&
-            const DeepCollectionEquality().equals(other.imagePath, imagePath) &&
-            const DeepCollectionEquality().equals(other.titleTxt, titleTxt) &&
-            const DeepCollectionEquality().equals(other.kacl, kacl) &&
-            const DeepCollectionEquality().equals(other.meals, meals) &&
+            const DeepCollectionEquality().equals(other.dates, dates) &&
+            const DeepCollectionEquality().equals(other.brst, brst) &&
+            const DeepCollectionEquality().equals(other.brst_cal, brst_cal) &&
+            const DeepCollectionEquality().equals(other.lunc, lunc) &&
+            const DeepCollectionEquality().equals(other.lunc_cal, lunc_cal) &&
+            const DeepCollectionEquality().equals(other.dinr, dinr) &&
+            const DeepCollectionEquality().equals(other.dinr_cal, dinr_cal) &&
+            const DeepCollectionEquality().equals(other.sum_cal, sum_cal) &&
+            const DeepCollectionEquality().equals(other.adspcfd, adspcfd) &&
+            const DeepCollectionEquality()
+                .equals(other.adspcfd_cal, adspcfd_cal) &&
             const DeepCollectionEquality()
                 .equals(other.startColor, startColor) &&
             const DeepCollectionEquality().equals(other.endColor, endColor));
@@ -235,10 +350,16 @@ class _$_FoodMenuInfo implements _FoodMenuInfo {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(imagePath),
-      const DeepCollectionEquality().hash(titleTxt),
-      const DeepCollectionEquality().hash(kacl),
-      const DeepCollectionEquality().hash(meals),
+      const DeepCollectionEquality().hash(dates),
+      const DeepCollectionEquality().hash(brst),
+      const DeepCollectionEquality().hash(brst_cal),
+      const DeepCollectionEquality().hash(lunc),
+      const DeepCollectionEquality().hash(lunc_cal),
+      const DeepCollectionEquality().hash(dinr),
+      const DeepCollectionEquality().hash(dinr_cal),
+      const DeepCollectionEquality().hash(sum_cal),
+      const DeepCollectionEquality().hash(adspcfd),
+      const DeepCollectionEquality().hash(adspcfd_cal),
       const DeepCollectionEquality().hash(startColor),
       const DeepCollectionEquality().hash(endColor));
 
@@ -255,28 +376,46 @@ class _$_FoodMenuInfo implements _FoodMenuInfo {
 
 abstract class _FoodMenuInfo implements FoodMenuInfo {
   factory _FoodMenuInfo(
-      {required String imagePath,
-      required String titleTxt,
-      required String kacl,
-      required List<String> meals,
-      required String startColor,
-      required String endColor}) = _$_FoodMenuInfo;
+      {required String dates,
+      required String brst,
+      required String brst_cal,
+      required String lunc,
+      required String lunc_cal,
+      required String dinr,
+      required String dinr_cal,
+      required String sum_cal,
+      String? adspcfd,
+      String? adspcfd_cal,
+      String? startColor,
+      String? endColor}) = _$_FoodMenuInfo;
 
   factory _FoodMenuInfo.fromJson(Map<String, dynamic> json) =
       _$_FoodMenuInfo.fromJson;
 
   @override
-  String get imagePath;
+  String get dates;
   @override
-  String get titleTxt;
+  String get brst;
   @override
-  String get kacl;
+  String get brst_cal;
   @override
-  List<String> get meals;
+  String get lunc;
   @override
-  String get startColor;
+  String get lunc_cal;
   @override
-  String get endColor;
+  String get dinr;
+  @override
+  String get dinr_cal;
+  @override
+  String get sum_cal;
+  @override
+  String? get adspcfd;
+  @override
+  String? get adspcfd_cal;
+  @override
+  String? get startColor;
+  @override
+  String? get endColor;
   @override
   @JsonKey(ignore: true)
   _$FoodMenuInfoCopyWith<_FoodMenuInfo> get copyWith =>

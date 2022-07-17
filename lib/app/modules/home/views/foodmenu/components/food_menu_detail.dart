@@ -6,7 +6,7 @@ import 'package:military/app/ui/theme/app_theme.dart';
 import 'package:military/main.dart';
 
 import '../../../../../data/model/food_menu_info.dart';
-import '../../../controllers/FoodMenuController.dart';
+import '../../../controllers/food_menu_controller.dart';
 
 // MealsListView
 class FoodMenuDetail extends GetView<FoodMenuController> {
@@ -104,15 +104,14 @@ class Type2View extends StatelessWidget {
                         border: Border.all(),
                         boxShadow: <BoxShadow>[
                           BoxShadow(
-                              color: HexColor(foodMenuInfo!.endColor)
-                                  .withOpacity(0.6),
+                              color: HexColor('#536349').withOpacity(0.6),
                               offset: const Offset(1.1, 4.0),
                               blurRadius: 8.0),
                         ],
                         gradient: LinearGradient(
                           colors: <HexColor>[
-                            HexColor(foodMenuInfo!.startColor),
-                            HexColor(foodMenuInfo!.endColor),
+                            HexColor('#536349'),
+                            HexColor('#536349'),
                           ],
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
@@ -134,7 +133,7 @@ class Type2View extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Text(
-                              foodMenuInfo!.titleTxt,
+                              '조식',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontFamily: AppTheme.fontName,
@@ -153,11 +152,12 @@ class Type2View extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Text(
-                                      foodMenuInfo!.meals.join('\n'),
+                                      //foodMenuInfo!.meals.join('\n'),
+                                      foodMenuInfo!.brst,
                                       style: TextStyle(
                                         fontFamily: AppTheme.fontName,
                                         fontWeight: FontWeight.w500,
-                                        fontSize: 10,
+                                        fontSize: 9,
                                         letterSpacing: 0.2,
                                         color: AppTheme.white,
                                       ),
@@ -166,38 +166,41 @@ class Type2View extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            int.parse(foodMenuInfo!.kacl) != 0
-                                ? Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: <Widget>[
-                                      Text(
-                                        foodMenuInfo!.kacl.toString(),
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontFamily: AppTheme.fontName,
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 24,
-                                          letterSpacing: 0.2,
-                                          color: AppTheme.white,
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 4, bottom: 3),
-                                        child: Text(
-                                          'kcal',
-                                          style: TextStyle(
-                                            fontFamily: AppTheme.fontName,
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 10,
-                                            letterSpacing: 0.2,
-                                            color: AppTheme.white,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  )
+                            //int.parse(foodMenuInfo!.sum_cal) != 0
+                            // ?
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: <Widget>[
+                                Text(
+                                  foodMenuInfo!.sum_cal.toString(),
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontFamily: AppTheme.fontName,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 12,
+                                      letterSpacing: 0.2,
+                                      color: AppTheme.white,
+                                      overflow: TextOverflow.ellipsis),
+                                ),
+                                /*
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(left: 4, bottom: 3),
+                                  child: Text(
+                                    'kcal',
+                                    style: TextStyle(
+                                      fontFamily: AppTheme.fontName,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 10,
+                                      letterSpacing: 0.2,
+                                      color: AppTheme.white,
+                                    ),
+                                  ),
+                                ),*/
+                              ],
+                            )
+                            /*
                                 : Container(
                                     decoration: BoxDecoration(
                                       color: AppTheme.nearlyWhite,
@@ -214,11 +217,11 @@ class Type2View extends StatelessWidget {
                                       padding: const EdgeInsets.all(6.0),
                                       child: Icon(
                                         Icons.add,
-                                        color: HexColor(foodMenuInfo!.endColor),
+                                        color: HexColor('#536349'),
                                         size: 24,
                                       ),
                                     ),
-                                  ),
+                                  ),*/
                           ],
                         ),
                       ),
@@ -242,7 +245,8 @@ class Type2View extends StatelessWidget {
                     child: SizedBox(
                       width: 80,
                       height: 80,
-                      child: Image.asset(foodMenuInfo!.imagePath), // 음식 그림
+                      child:
+                          Image.asset('assets/images/breakfast.png'), // 음식 그림
                       //child: Icon(Icons.food_bank),
                     ),
                   )

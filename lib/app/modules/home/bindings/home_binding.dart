@@ -6,8 +6,9 @@ import 'package:military/app/modules/home/controllers/customs/calendar_popup_con
 import 'package:military/app/modules/home/controllers/first_tab_controller.dart';
 import 'package:military/app/modules/home/controllers/second_tab_controller.dart';
 import 'package:military/app/modules/home/controllers/tmo_controller.dart';
-import 'package:military/app/modules/home/controllers/FoodMenuController.dart';
+import 'package:military/app/modules/home/controllers/food_menu_controller.dart';
 
+import '../controllers/customs/movie_calendar_popup_controller.dart';
 import '../controllers/home_controller.dart';
 
 class HomeBinding extends Bindings {

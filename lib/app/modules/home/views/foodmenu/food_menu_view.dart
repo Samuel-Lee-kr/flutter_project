@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:military/app/modules/home/controllers/first_tab_controller.dart';
 import 'package:military/app/modules/home/controllers/home_controller.dart';
 import 'package:military/app/modules/home/views/customs/calendar_popup_view.dart';
@@ -15,11 +16,12 @@ import 'package:military/app/modules/home/views/foodmenu/components/food_menu_de
 import 'package:military/app/modules/home/views/foodmenu/components/my_body_info.dart';
 import 'package:military/app/ui/theme/app_theme.dart';
 
-import '../../controllers/FoodMenuController.dart';
+import '../../controllers/food_menu_controller.dart';
+import '../customs/calendar_popup_oneday_view.dart';
 
 class FoodMenuView extends GetView<FoodMenuController> {
   HomeController homeController = Get.find();
-
+  //DateTime startDate = DateTime.now();
   FoodMenuView() {
     controller.initFirstTabAnimationController(
         homeController.homeViewAnimationController!);
@@ -259,7 +261,16 @@ class FoodMenuView extends GetView<FoodMenuController> {
                                     showDialog<dynamic>(
                                         context: context,
                                         builder: (BuildContext context) =>
-                                            CalendarPopupView());
+                                            CalendarPopupOnedayView(
+                                                onApplyClick:
+                                                    (DateTime startDate,
+                                                        DateTime endData) {
+                                              //   setState(() {
+                                              controller.startDate = startDate;
+                                              //startDate = startData;
+                                              //      endDate = endData;
+                                              //   });
+                                            }));
                                   },
                                   child: Row(
                                     children: <Widget>[
@@ -273,7 +284,9 @@ class FoodMenuView extends GetView<FoodMenuController> {
                                         ),
                                       ),
                                       Text(
-                                        '15 May',
+                                        DateFormat("MM.dd").format(
+                                            DateTime.parse(controller.startDate
+                                                .toString())),
                                         textAlign: TextAlign.left,
                                         style: TextStyle(
                                           fontFamily: AppTheme.fontName,

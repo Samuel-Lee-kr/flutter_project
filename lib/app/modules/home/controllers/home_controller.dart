@@ -4,7 +4,6 @@ import 'package:military/app/modules/home/models/tabicon_data.dart';
 import 'package:military/app/modules/home/views/bottom_bar_view.dart';
 
 class HomeController extends GetxController with GetTickerProviderStateMixin {
-   
   // home_view.dart 에서 활용
   AnimationController? homeViewAnimationController;
   Function(int index)? changeIndex;
@@ -22,6 +21,9 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
 
   final startDate = DateTime.now().obs;
   final endDate = DateTime.now().add(const Duration(days: 5)).obs;
+
+  final movieStartDate = DateTime.now().obs;
+  final movieEndDate = DateTime.now().add(const Duration(days: 0)).obs;
 
   // home_view.dart 에서 활용
   void initHomeViewAnimationController() {
@@ -41,10 +43,10 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
         if (status == AnimationStatus.completed) {
           removeAllSelect[index]!();
           tabIconsList[index].animationController?.reverse();
-          for(int i = 0; i < imageAssets.length; i++) {
+          for (int i = 0; i < imageAssets.length; i++) {
             imageAssets[i] = Image.asset(tabIconsList[i].isSelected
-                      ? tabIconsList[i].selectedImagePath
-                      : tabIconsList[i].imagePath);
+                ? tabIconsList[i].selectedImagePath
+                : tabIconsList[i].imagePath);
           }
         }
       });

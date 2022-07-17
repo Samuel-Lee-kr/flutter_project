@@ -8,12 +8,26 @@ part 'food_menu_info.g.dart';
 @freezed
 class FoodMenuInfo with _$FoodMenuInfo {
   factory FoodMenuInfo({
+    required String dates,
+    required String brst,
+    required String brst_cal,
+    required String lunc,
+    required String lunc_cal,
+    required String dinr,
+    required String dinr_cal,
+    required String sum_cal,
+    String? adspcfd,
+    String? adspcfd_cal,
+    String? startColor,
+    String? endColor,
+    /*
     required String imagePath,
     required String titleTxt,
     required String kacl,
     required List<String> meals,
     required String startColor,
     required String endColor,
+    */
   }) = _FoodMenuInfo;
 
   factory FoodMenuInfo.fromJson(Map<String, dynamic> json) =>

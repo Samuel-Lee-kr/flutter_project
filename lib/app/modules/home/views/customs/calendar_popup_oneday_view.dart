@@ -1,32 +1,62 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
-
-import 'package:get/get.dart';
-import 'package:military/app/modules/home/controllers/customs/calendar_popup_controller.dart';
-import 'package:military/app/modules/home/controllers/home_controller.dart';
-import 'package:military/app/modules/home/views/customs/calendar_view.dart';
-import 'package:military/app/ui/theme/app_theme.dart';
-
 import 'package:intl/intl.dart';
 
-class CalendarPopupView extends GetView<CalendarPopupController> {
-  HomeController homeController = Get.find();
+import 'custom_calendar_oneday.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import '../../../../ui/theme/app_theme.dart';
 
-  CalendarPopupView() {
-    controller.barrierDismissible.value = true;
-    controller.initialStartDate = homeController.startDate.value;
-    controller.initialEndDate = homeController.endDate.value;
+class CalendarPopupOnedayView extends StatefulWidget {
+  const CalendarPopupOnedayView(
+      {Key? key,
+      this.initialStartDate,
+      this.initialEndDate,
+      this.onApplyClick,
+      this.onCancelClick,
+      this.barrierDismissible = true,
+      this.minimumDate,
+      this.maximumDate})
+      : super(key: key);
 
-    controller.onApplyClick = (DateTime startData, DateTime endData) {
-      homeController.startDate.value = startData;
-      homeController.endDate.value = endData;
-      controller.initialStartDate = startData;
-      controller.initialEndDate = endData;
-    };
+  final DateTime? minimumDate;
+  final DateTime? maximumDate;
+  final bool barrierDismissible;
+  final DateTime? initialStartDate;
+  final DateTime? initialEndDate;
+  final Function(DateTime, DateTime)? onApplyClick;
 
-    controller.onCancelClick = () {};
+  final Function()? onCancelClick;
+  @override
+  _CalendarPopupOnedayViewState createState() =>
+      _CalendarPopupOnedayViewState();
+}
 
-    controller.initAnimationController();
-    controller.animationController?.forward();
+class _CalendarPopupOnedayViewState extends State<CalendarPopupOnedayView>
+    with TickerProviderStateMixin {
+  AnimationController? animationController;
+  DateTime? startDate;
+  DateTime? endDate;
+
+  @override
+  void initState() {
+    animationController = AnimationController(
+        duration: const Duration(milliseconds: 400), vsync: this);
+    if (widget.initialStartDate != null) {
+      startDate = widget.initialStartDate;
+    }
+    if (widget.initialEndDate != null) {
+      endDate = widget.initialEndDate;
+    }
+    initializeDateFormatting('ko_KR', null);
+    animationController?.forward();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    animationController?.dispose();
+    super.dispose();
   }
 
   @override
@@ -35,18 +65,18 @@ class CalendarPopupView extends GetView<CalendarPopupController> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: AnimatedBuilder(
-          animation: controller.animationController!,
+          animation: animationController!,
           builder: (BuildContext context, Widget? child) {
             return AnimatedOpacity(
               duration: const Duration(milliseconds: 100),
-              opacity: controller.animationController!.value,
+              opacity: animationController!.value,
               child: InkWell(
                 splashColor: Colors.transparent,
                 focusColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 hoverColor: Colors.transparent,
                 onTap: () {
-                  if (controller.barrierDismissible.value) {
+                  if (widget.barrierDismissible) {
                     Navigator.pop(context);
                   }
                 },
@@ -55,7 +85,7 @@ class CalendarPopupView extends GetView<CalendarPopupController> {
                     padding: const EdgeInsets.all(24.0),
                     child: Container(
                       decoration: BoxDecoration(
-                        color: AppTheme.nearlyWhite,
+                        color: Colors.white,
                         borderRadius:
                             const BorderRadius.all(Radius.circular(24.0)),
                         boxShadow: <BoxShadow>[
@@ -77,14 +107,26 @@ class CalendarPopupView extends GetView<CalendarPopupController> {
                             const Divider(
                               height: 1,
                             ),
-                            CalendarView(),
+                            CustomCalendarOnedayView(
+                              minimumDate: widget.minimumDate,
+                              maximumDate: widget.maximumDate,
+                              initialEndDate: widget.initialEndDate,
+                              initialStartDate: widget.initialStartDate,
+                              startEndDateChange: (DateTime startDateData,
+                                  DateTime endDateData) {
+                                setState(() {
+                                  startDate = startDateData;
+                                  endDate = endDateData;
+                                });
+                              },
+                            ),
                             Padding(
                               padding: const EdgeInsets.only(
                                   left: 16, right: 16, bottom: 16, top: 8),
                               child: Container(
                                 height: 48,
                                 decoration: BoxDecoration(
-                                  color: AppTheme.nearlyDarkBlue,
+                                  color: AppTheme.nearlyBlue,
                                   borderRadius: const BorderRadius.all(
                                       Radius.circular(24.0)),
                                   boxShadow: <BoxShadow>[
@@ -106,19 +148,20 @@ class CalendarPopupView extends GetView<CalendarPopupController> {
                                         // animationController.reverse().then((f) {
 
                                         // });
-                                        controller.onApplyClick!(
-                                            controller.initialStartDate!,
-                                            controller.initialEndDate!);
+                                        widget.onApplyClick!(
+                                            startDate!, endDate!);
                                         Navigator.pop(context);
-                                      } catch (_) {}
+                                      } catch (_) {
+                                        print(_.toString());
+                                      }
                                     },
                                     child: Center(
                                       child: Text(
-                                        'Apply',
+                                        '날짜 선택',
                                         style: TextStyle(
                                             fontWeight: FontWeight.w500,
                                             fontSize: 18,
-                                            color: Colors.white),
+                                            color: AppTheme.nearlyDarkBlue),
                                       ),
                                     ),
                                   ),

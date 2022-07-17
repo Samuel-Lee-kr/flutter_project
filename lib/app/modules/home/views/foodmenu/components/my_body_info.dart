@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:military/app/ui/theme/app_theme.dart';
 
-class MyBodyInfo extends GetView {
+import '../../../controllers/food_menu_controller.dart';
+
+class MyBodyInfo extends GetView<FoodMenuController> {
   final AnimationController? animationController;
   final Animation<double>? animation;
   final TextEditingController _myData1 = TextEditingController();
@@ -80,6 +82,7 @@ class MyBodyInfo extends GetView {
                                         child: TextField(
                                           textAlign: TextAlign.center,
                                           onChanged: (value) {
+                                            controller.myheight = value;
                                             // _myData3.text = double.parse(
                                             //     double.parse(value)! /
                                             //         (double.parse(_myData2) *
@@ -219,6 +222,14 @@ class MyBodyInfo extends GetView {
                                       border: InputBorder.none,
                                       hintText: '입력',
                                     ),
+                                    onChanged: (value) {
+                                      controller.myweight = value;
+                                      // _myData3.text = double.parse(
+                                      //     double.parse(value)! /
+                                      //         (double.parse(_myData2) *
+                                      //             double.parse(
+                                      //                 _myData2)));
+                                    },
                                   ),
                                 ),
                                 /*
@@ -259,17 +270,19 @@ class MyBodyInfo extends GetView {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: <Widget>[
-                                    Text(
-                                      '27.3 BMI',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        fontFamily: AppTheme.fontName,
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 16,
-                                        letterSpacing: -0.2,
-                                        color: AppTheme.darkText,
-                                      ),
-                                    ),
+                                    Obx(() {
+                                      return Text(
+                                        "${controller.mybmi.value}",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontFamily: AppTheme.fontName,
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 16,
+                                          letterSpacing: -0.2,
+                                          color: AppTheme.darkText,
+                                        ),
+                                      );
+                                    }),
                                     Padding(
                                       padding: const EdgeInsets.only(top: 6),
                                       child: Text(
@@ -297,16 +310,19 @@ class MyBodyInfo extends GetView {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: <Widget>[
-                                    Text(
-                                      '20%',
-                                      style: TextStyle(
-                                        fontFamily: AppTheme.fontName,
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 16,
-                                        letterSpacing: -0.2,
-                                        color: AppTheme.darkText,
-                                      ),
-                                    ),
+                                    Obx(() {
+                                      return Text(
+                                        "${controller.mybodyfat.value}%",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontFamily: AppTheme.fontName,
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 16,
+                                          letterSpacing: -0.2,
+                                          color: AppTheme.darkText,
+                                        ),
+                                      );
+                                    }),
                                     Padding(
                                       padding: const EdgeInsets.only(top: 6),
                                       child: Text(
